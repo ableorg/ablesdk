@@ -1,0 +1,16 @@
+.gitignore
+.openapi-generator-ignore
+.travis.yml
+README.md
+api/openapi.yaml
+client.go
+configuration.go
+docs/ProtobufAny.md
+docs/RpcStatus.md
+git_push.sh
+go.mod
+go.sum
+model_protobuf_any.go
+model_rpc_status.go
+response.go
+utils.go

@@ -1,0 +1,37 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@able.ai
+    name: Able technical support
+    url: https://www.able.ai/contact
+  description: SDK for building integrations with Able.
+  license:
+    name: MIT
+    url: https://github.com/ableorg/ablesdk/blob/main/LICENSE
+  title: Able API
+  version: "1.20230614220956"
+servers:
+- url: https://api.ableai.com/
+paths: {}
+components:
+  schemas:
+    protobufAny:
+      additionalProperties:
+        type: object
+      properties:
+        '@type':
+          type: string
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+          type: array
+      type: object
+x-original-swagger-version: "2.0"

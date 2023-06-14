@@ -1,0 +1,17 @@
+.gitignore
+.openapi-generator-ignore
+.travis.yml
+README.md
+bin/autodoc
+docs/ProtobufAny.md
+docs/RpcStatus.md
+git_push.sh
+lib/AbleSDK/ApiClient.pm
+lib/AbleSDK/ApiFactory.pm
+lib/AbleSDK/Configuration.pm
+lib/AbleSDK/Object/ProtobufAny.pm
+lib/AbleSDK/Object/RpcStatus.pm
+lib/AbleSDK/Role.pm
+lib/AbleSDK/Role/AutoDoc.pm
+t/ProtobufAnyTest.t
+t/RpcStatusTest.t
