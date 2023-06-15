@@ -1,0 +1,11 @@
+.openapi-generator-ignore
+apis/APIApi.ts
+apis/index.ts
+index.ts
+models/ProtobufAny.ts
+models/RpcStatus.ts
+models/V1Relationship.ts
+models/V1Upload.ts
+models/V1UploadRef.ts
+models/index.ts
+runtime.ts
