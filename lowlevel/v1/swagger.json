@@ -1,0 +1,420 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Able API",
+    "version": "1.20230621235520",
+    "description": "SDK for building integrations with Able.",
+    "contact": {
+      "name": "Able technical support",
+      "url": "https://www.able.ai/contact",
+      "email": "support@able.ai"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/ableorg/ablesdk/blob/main/LICENSE"
+    }
+  },
+  "tags": [
+    {
+      "name": "API"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/extensions/{extensionId}/documentVersion": {
+      "put": {
+        "summary": "Creates a new DocumentVersion. The DocumentVersion represents a document\nfrom an external system that needs to be processed.",
+        "operationId": "API_CreateDocumentVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DocumentVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "extensionId",
+            "description": "The unique ID of the extension.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "documents": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/v1Document"
+                  },
+                  "description": "A list of documents to be added to the DocumentVersion."
+                }
+              },
+              "description": "Request to create a new DocumentVersion."
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/extensions/{extensionId}/documentVersionQueue/{workerName}/acquire": {
+      "put": {
+        "summary": "Acquires a DocumentVersion task. The task represents a document to be\nprocessed and once acquired, should be processed within the expected\nexecution time. If the task is not completed within the expected time,\nit will be made available for acquisition by other workers.",
+        "operationId": "API_AcquireDocumentVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AcquiredDocumentVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "extensionId",
+            "description": "The unique ID of the extension.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "description": "The name of the worker that will process the task.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1AcquireDocumentVersionRequestProperties"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/extensions/{extensionId}/documentVersionQueue/{workerName}/complete/{documentVersionId}": {
+      "put": {
+        "summary": "Completes a DocumentVersion task. The task should be marked as complete\nafter successful processing or if an error occurs during processing. If\ncompleted successfully, any extracted document attributes should be\nincluded in the completion request.",
+        "operationId": "API_CompleteDocumentVersion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CompletedDocumentVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "extensionId",
+            "description": "The unique ID of the extension.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "description": "The name of the worker that processed the task.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "documentVersionId",
+            "description": "The ID of the document version that was processed.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CompleteDocumentVersionRequestProperties"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AcquireDocumentVersionRequestProperties": {
+      "type": "object",
+      "properties": {
+        "expectedExecutionDuration": {
+          "type": "string",
+          "description": "The expected amount of time for task execution."
+        }
+      },
+      "required": [
+        "expectedExecutionDuration"
+      ]
+    },
+    "v1AcquiredDocumentVersion": {
+      "type": "object",
+      "properties": {
+        "documentVersionId": {
+          "type": "string",
+          "description": "The ID of the document version."
+        },
+        "externalPrimaryKey": {
+          "type": "string",
+          "description": "The primary key of the document in the external system."
+        },
+        "direction": {
+          "$ref": "#/definitions/v1DataTransferDirection",
+          "description": "The direction of data transfer."
+        },
+        "uploadUrl": {
+          "type": "string",
+          "description": "The upload URL for the document file in GCS."
+        },
+        "rawFileUrl": {
+          "type": "string",
+          "description": "The download URL for the raw document file in GCS."
+        },
+        "standardizedPdfUrl": {
+          "type": "string",
+          "description": "The download URL for the standardized PDF file in GCS."
+        },
+        "contentUrl": {
+          "type": "string",
+          "description": "The download URL for the content file in GCS."
+        },
+        "acquiredBy": {
+          "type": "string",
+          "description": "The name of the worker that acquired the document version."
+        },
+        "acquiredTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the document version was acquired."
+        },
+        "acquiredDuration": {
+          "type": "string",
+          "description": "The expected amount of time for task execution."
+        }
+      },
+      "description": "Represents a DocumentVersion that has been acquired for processing."
+    },
+    "v1Attribute": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the attribute."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the attribute."
+        },
+        "type": {
+          "$ref": "#/definitions/v1AttributeType",
+          "description": "The type of the attribute."
+        }
+      },
+      "description": "Represents an attribute of a document.",
+      "required": [
+        "key",
+        "value",
+        "type"
+      ]
+    },
+    "v1AttributeType": {
+      "type": "string",
+      "enum": [
+        "ATTRIBUTE_TYPE_UNSPECIFIED",
+        "AUTO",
+        "STRING",
+        "NUMBER"
+      ],
+      "default": "ATTRIBUTE_TYPE_UNSPECIFIED",
+      "description": "The data type of an attribute.\n\n - AUTO: Guess the attribute type based on its value.\n - STRING: Interpret the attribute as a string.\n - NUMBER: Interpret the attribute as a numeric value."
+    },
+    "v1CompleteDocumentVersionRequestProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1DocumentVersionStatus",
+          "description": "The status of the task after processing."
+        },
+        "lastError": {
+          "type": "string",
+          "description": "Any error message generated during processing, empty if status is\nCOMPLETE."
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "description": "Any attributes extracted from the document during processing."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "v1CompletedDocumentVersion": {
+      "type": "object",
+      "properties": {
+        "documentVersionId": {
+          "type": "string",
+          "description": "The ID of the document version."
+        },
+        "status": {
+          "$ref": "#/definitions/v1DocumentVersionStatus",
+          "description": "The status of the task after processing."
+        },
+        "lastError": {
+          "type": "string",
+          "description": "Any error message generated during processing, empty if status is\nCOMPLETE."
+        },
+        "acquiredBy": {
+          "type": "string",
+          "description": "The name of the worker that acquired the document version."
+        },
+        "acquiredTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the document version was acquired."
+        },
+        "completedBy": {
+          "type": "string",
+          "description": "The name of the worker that completed the document version."
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the document version was completed."
+        }
+      },
+      "description": "Represents a DocumentVersion that has been completed after processing."
+    },
+    "v1DataTransferDirection": {
+      "type": "string",
+      "enum": [
+        "DATA_TRANSFER_DIRECTION_UNSPECIFIED",
+        "TO_ABLE",
+        "TO_EXTERNAL"
+      ],
+      "default": "DATA_TRANSFER_DIRECTION_UNSPECIFIED",
+      "description": "Direction of data transfer.\n\n - TO_ABLE: Data is transfered from an external source to Able.\n - TO_EXTERNAL: Data is transfered from Able to an external source."
+    },
+    "v1Document": {
+      "type": "object",
+      "properties": {
+        "externalPrimaryKey": {
+          "type": "string",
+          "description": "The primary key of the document in the external system."
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "description": "Attributes associated with the document."
+        }
+      },
+      "description": "Represents a document to be added to a DocumentVersion."
+    },
+    "v1DocumentVersion": {
+      "type": "object",
+      "properties": {
+        "externalPrimaryKey": {
+          "type": "string",
+          "description": "The primary key of the document in the external system."
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "description": "Attributes associated with the document."
+        }
+      },
+      "description": "Represents a document version created for processing."
+    },
+    "v1DocumentVersionStatus": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT_VERSION_STATUS_UNSPECIFIED",
+        "COMPLETE",
+        "ERROR"
+      ],
+      "default": "DOCUMENT_VERSION_STATUS_UNSPECIFIED",
+      "description": "Status of processing a document version.\n\n - COMPLETE: Document processing has been successful.\n - ERROR: Document processing was not successful."
+    }
+  },
+  "host": "api.ableai.com",
+  "schemes": [
+    "https"
+  ]
+}
