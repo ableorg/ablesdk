@@ -1,0 +1,429 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Able API",
+    "version": "1.20230622180011",
+    "description": "SDK for building integrations with Able.",
+    "contact": {
+      "name": "Able technical support",
+      "url": "https://www.able.ai/contact",
+      "email": "support@able.ai"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/ableorg/ablesdk/blob/main/LICENSE"
+    }
+  },
+  "tags": [
+    {
+      "name": "API"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/extensions/{extensionId}/documentContent": {
+      "put": {
+        "summary": "Creates a new DocumentContent. The DocumentContent represents a document\nfrom an external system that needs to be processed.",
+        "operationId": "API_CreateDocumentContentV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DocumentContent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "extensionId",
+            "description": "The unique ID of the extension.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "body": {
+                  "$ref": "#/definitions/v1CreateDocumentContentRequestV1Body"
+                }
+              },
+              "description": "Request to create a new DocumentContent."
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/extensions/{extensionId}/documentContentQueue/{workerName}/acquire": {
+      "put": {
+        "summary": "Acquires a DocumentContent task. The task represents a document to be\nprocessed and once acquired, should be processed within the expected\nexecution time. If the task is not completed within the expected time,\nit will be made available for acquisition by other workers.",
+        "operationId": "API_AcquireDocumentContentV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AcquiredDocumentContentV1"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "extensionId",
+            "description": "The unique ID of the extension.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "description": "The name of the worker that will process the task.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1AcquireDocumentContentRequestV1Body"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    },
+    "/v1/extensions/{extensionId}/documentContentQueue/{workerName}/complete/{documentContentId}": {
+      "put": {
+        "summary": "Completes a DocumentContent task. The task should be marked as complete\nafter successful processing or if an error occurs during processing. If\ncompleted successfully, any extracted document attributes should be\nincluded in the completion request.",
+        "operationId": "API_CompleteDocumentContentV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CompletedDocumentContentV1"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "extensionId",
+            "description": "The unique ID of the extension.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "description": "The name of the worker that processed the task.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "documentContentId",
+            "description": "The ID of the document content that was processed.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CompleteDocumentContentRequestV1Body"
+            }
+          }
+        ],
+        "tags": [
+          "API"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AcquireDocumentContentRequestV1Body": {
+      "type": "object",
+      "properties": {
+        "expectedExecutionDuration": {
+          "type": "string",
+          "description": "The expected amount of time for task execution."
+        }
+      },
+      "required": [
+        "expectedExecutionDuration"
+      ]
+    },
+    "v1AcquiredDocumentContentV1": {
+      "type": "object",
+      "properties": {
+        "documentContentId": {
+          "type": "string",
+          "description": "The ID of the document content."
+        },
+        "externalPrimaryKey": {
+          "type": "string",
+          "description": "The primary key of the document in the external system."
+        },
+        "direction": {
+          "$ref": "#/definitions/v1DataTransferDirectionV1",
+          "description": "The direction of data transfer."
+        },
+        "uploadUrl": {
+          "type": "string",
+          "description": "The upload URL for the document file in GCS."
+        },
+        "rawFileUrl": {
+          "type": "string",
+          "description": "The download URL for the raw document file in GCS."
+        },
+        "standardizedPdfUrl": {
+          "type": "string",
+          "description": "The download URL for the standardized PDF file in GCS."
+        },
+        "contentUrl": {
+          "type": "string",
+          "description": "The download URL for the content file in GCS."
+        },
+        "acquiredBy": {
+          "type": "string",
+          "description": "The name of the worker that acquired the document content."
+        },
+        "acquiredTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the document content was acquired."
+        },
+        "nextRetryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expected time of task compleation. If not completed before this time,\nthe task will be retried."
+        }
+      },
+      "description": "Represents a DocumentContent that has been acquired for processing."
+    },
+    "v1Attribute": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the attribute."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the attribute."
+        },
+        "type": {
+          "$ref": "#/definitions/v1AttributeTypeV1",
+          "description": "The type of the attribute."
+        }
+      },
+      "description": "Represents an attribute of document content.",
+      "required": [
+        "key",
+        "value",
+        "type"
+      ]
+    },
+    "v1AttributeTypeV1": {
+      "type": "string",
+      "enum": [
+        "ATTRIBUTE_TYPE_UNSPECIFIED",
+        "AUTO",
+        "STRING",
+        "NUMBER"
+      ],
+      "default": "ATTRIBUTE_TYPE_UNSPECIFIED",
+      "description": "The data type of an attribute.\n\n - AUTO: Guess the attribute type based on its value.\n - STRING: Interpret the attribute as a string.\n - NUMBER: Interpret the attribute as a numeric value."
+    },
+    "v1CompleteDocumentContentRequestV1Body": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/v1DocumentContentStatusV1",
+          "description": "The status of the task after processing."
+        },
+        "lastError": {
+          "type": "string",
+          "description": "Any error message generated during processing, empty if status is\nCOMPLETE."
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "description": "Any attributes extracted from the document during processing."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "v1CompletedDocumentContentV1": {
+      "type": "object",
+      "properties": {
+        "documentContentId": {
+          "type": "string",
+          "description": "The ID of the document content."
+        },
+        "status": {
+          "$ref": "#/definitions/v1DocumentContentStatusV1",
+          "description": "The status of the task after processing."
+        },
+        "lastError": {
+          "type": "string",
+          "description": "Any error message generated during processing, empty if status is\nCOMPLETE."
+        },
+        "acquiredBy": {
+          "type": "string",
+          "description": "The name of the worker that acquired the document content."
+        },
+        "acquiredTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the document content was acquired."
+        },
+        "completedBy": {
+          "type": "string",
+          "description": "The name of the worker that completed the document content."
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the document content was completed."
+        }
+      },
+      "description": "Represents a DocumentContent that has been completed after processing."
+    },
+    "v1CreateDocumentContentRequestV1Body": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Document"
+          },
+          "description": "A list of documents to be added to the DocumentContent."
+        }
+      }
+    },
+    "v1DataTransferDirectionV1": {
+      "type": "string",
+      "enum": [
+        "DATA_TRANSFER_DIRECTION_UNSPECIFIED",
+        "TO_ABLE",
+        "TO_EXTERNAL"
+      ],
+      "default": "DATA_TRANSFER_DIRECTION_UNSPECIFIED",
+      "description": "Direction of data transfer.\n\n - TO_ABLE: Data is transfered from an external source to Able.\n - TO_EXTERNAL: Data is transfered from Able to an external source."
+    },
+    "v1Document": {
+      "type": "object",
+      "properties": {
+        "externalPrimaryKey": {
+          "type": "string",
+          "description": "The primary key of the document in the external system."
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "description": "Attributes associated with the document."
+        }
+      },
+      "description": "Represents a document to be added to a DocumentContent."
+    },
+    "v1DocumentContent": {
+      "type": "object",
+      "properties": {
+        "externalPrimaryKey": {
+          "type": "string",
+          "description": "The primary key of the document in the external system."
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "description": "Attributes associated with the document."
+        }
+      },
+      "description": "Represents a document content created for processing."
+    },
+    "v1DocumentContentStatusV1": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT_CONTENT_STATUS_UNSPECIFIED",
+        "COMPLETE",
+        "ERROR"
+      ],
+      "default": "DOCUMENT_CONTENT_STATUS_UNSPECIFIED",
+      "description": "Status of processing document content.\n\n - COMPLETE: Document processing has been successful.\n - ERROR: Document processing was not successful."
+    }
+  },
+  "host": "api.ableai.com",
+  "schemes": [
+    "https"
+  ]
+}

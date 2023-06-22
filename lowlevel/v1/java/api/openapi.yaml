@@ -1,0 +1,394 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@able.ai
+    name: Able technical support
+    url: https://www.able.ai/contact
+  description: SDK for building integrations with Able.
+  license:
+    name: MIT
+    url: https://github.com/ableorg/ablesdk/blob/main/LICENSE
+  title: Able API
+  version: "1.20230622180011"
+servers:
+- url: https://api.ableai.com/
+tags:
+- name: API
+paths:
+  /v1/extensions/{extensionId}/documentContent:
+    put:
+      operationId: API_CreateDocumentContentV1
+      parameters:
+      - description: The unique ID of the extension.
+        in: path
+        name: extensionId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            schema:
+              description: Request to create a new DocumentContent.
+              properties:
+                body:
+                  $ref: '#/components/schemas/v1CreateDocumentContentRequestV1Body'
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DocumentContent'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: |-
+        Creates a new DocumentContent. The DocumentContent represents a document
+        from an external system that needs to be processed.
+      tags:
+      - API
+      x-codegen-request-body-name: body
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/extensions/{extensionId}/documentContentQueue/{workerName}/acquire:
+    put:
+      operationId: API_AcquireDocumentContentV1
+      parameters:
+      - description: The unique ID of the extension.
+        in: path
+        name: extensionId
+        required: true
+        schema:
+          type: string
+      - description: The name of the worker that will process the task.
+        in: path
+        name: workerName
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AcquireDocumentContentRequestV1Body'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AcquiredDocumentContentV1'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: |-
+        Acquires a DocumentContent task. The task represents a document to be
+        processed and once acquired, should be processed within the expected
+        execution time. If the task is not completed within the expected time,
+        it will be made available for acquisition by other workers.
+      tags:
+      - API
+      x-codegen-request-body-name: body
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/extensions/{extensionId}/documentContentQueue/{workerName}/complete/{documentContentId}:
+    put:
+      operationId: API_CompleteDocumentContentV1
+      parameters:
+      - description: The unique ID of the extension.
+        in: path
+        name: extensionId
+        required: true
+        schema:
+          type: string
+      - description: The name of the worker that processed the task.
+        in: path
+        name: workerName
+        required: true
+        schema:
+          type: string
+      - description: The ID of the document content that was processed.
+        in: path
+        name: documentContentId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1CompleteDocumentContentRequestV1Body'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1CompletedDocumentContentV1'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: |-
+        Completes a DocumentContent task. The task should be marked as complete
+        after successful processing or if an error occurs during processing. If
+        completed successfully, any extracted document attributes should be
+        included in the completion request.
+      tags:
+      - API
+      x-codegen-request-body-name: body
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  requestBodies:
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
+  schemas:
+    protobufAny:
+      additionalProperties:
+        type: object
+      properties:
+        '@type':
+          type: string
+      type: object
+    rpcStatus:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+          type: array
+      type: object
+    v1AcquireDocumentContentRequestV1Body:
+      properties:
+        expectedExecutionDuration:
+          description: The expected amount of time for task execution.
+          type: string
+      required:
+      - expectedExecutionDuration
+      type: object
+    v1AcquiredDocumentContentV1:
+      description: Represents a DocumentContent that has been acquired for processing.
+      example:
+        documentContentId: documentContentId
+        contentUrl: contentUrl
+        uploadUrl: uploadUrl
+        standardizedPdfUrl: standardizedPdfUrl
+        rawFileUrl: rawFileUrl
+        acquiredTime: 2000-01-23T04:56:07.000+00:00
+        acquiredBy: acquiredBy
+        nextRetryTime: 2000-01-23T04:56:07.000+00:00
+        externalPrimaryKey: externalPrimaryKey
+      properties:
+        documentContentId:
+          description: The ID of the document content.
+          type: string
+        externalPrimaryKey:
+          description: The primary key of the document in the external system.
+          type: string
+        direction:
+          $ref: '#/components/schemas/v1DataTransferDirectionV1'
+        uploadUrl:
+          description: The upload URL for the document file in GCS.
+          type: string
+        rawFileUrl:
+          description: The download URL for the raw document file in GCS.
+          type: string
+        standardizedPdfUrl:
+          description: The download URL for the standardized PDF file in GCS.
+          type: string
+        contentUrl:
+          description: The download URL for the content file in GCS.
+          type: string
+        acquiredBy:
+          description: The name of the worker that acquired the document content.
+          type: string
+        acquiredTime:
+          description: The timestamp when the document content was acquired.
+          format: date-time
+          type: string
+        nextRetryTime:
+          description: |-
+            The expected time of task compleation. If not completed before this time,
+            the task will be retried.
+          format: date-time
+          type: string
+      type: object
+    v1Attribute:
+      description: Represents an attribute of document content.
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: The key of the attribute.
+          type: string
+        value:
+          description: The value of the attribute.
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AttributeTypeV1'
+      required:
+      - key
+      - type
+      - value
+      type: object
+    v1AttributeTypeV1:
+      default: ATTRIBUTE_TYPE_UNSPECIFIED
+      description: |-
+        The data type of an attribute.
+
+         - AUTO: Guess the attribute type based on its value.
+         - STRING: Interpret the attribute as a string.
+         - NUMBER: Interpret the attribute as a numeric value.
+      enum:
+      - ATTRIBUTE_TYPE_UNSPECIFIED
+      - AUTO
+      - STRING
+      - NUMBER
+      type: string
+    v1CompleteDocumentContentRequestV1Body:
+      properties:
+        status:
+          $ref: '#/components/schemas/v1DocumentContentStatusV1'
+        lastError:
+          description: |-
+            Any error message generated during processing, empty if status is
+            COMPLETE.
+          type: string
+        attributes:
+          description: Any attributes extracted from the document during processing.
+          items:
+            $ref: '#/components/schemas/v1Attribute'
+          type: array
+      required:
+      - status
+      type: object
+    v1CompletedDocumentContentV1:
+      description: Represents a DocumentContent that has been completed after processing.
+      example:
+        documentContentId: documentContentId
+        lastError: lastError
+        completedTime: 2000-01-23T04:56:07.000+00:00
+        acquiredTime: 2000-01-23T04:56:07.000+00:00
+        acquiredBy: acquiredBy
+        completedBy: completedBy
+      properties:
+        documentContentId:
+          description: The ID of the document content.
+          type: string
+        status:
+          $ref: '#/components/schemas/v1DocumentContentStatusV1'
+        lastError:
+          description: |-
+            Any error message generated during processing, empty if status is
+            COMPLETE.
+          type: string
+        acquiredBy:
+          description: The name of the worker that acquired the document content.
+          type: string
+        acquiredTime:
+          description: The timestamp when the document content was acquired.
+          format: date-time
+          type: string
+        completedBy:
+          description: The name of the worker that completed the document content.
+          type: string
+        completedTime:
+          description: The timestamp when the document content was completed.
+          format: date-time
+          type: string
+      type: object
+    v1CreateDocumentContentRequestV1Body:
+      properties:
+        documents:
+          description: A list of documents to be added to the DocumentContent.
+          items:
+            $ref: '#/components/schemas/v1Document'
+          type: array
+      type: object
+    v1DataTransferDirectionV1:
+      default: DATA_TRANSFER_DIRECTION_UNSPECIFIED
+      description: |-
+        Direction of data transfer.
+
+         - TO_ABLE: Data is transfered from an external source to Able.
+         - TO_EXTERNAL: Data is transfered from Able to an external source.
+      enum:
+      - DATA_TRANSFER_DIRECTION_UNSPECIFIED
+      - TO_ABLE
+      - TO_EXTERNAL
+      type: string
+    v1Document:
+      description: Represents a document to be added to a DocumentContent.
+      properties:
+        externalPrimaryKey:
+          description: The primary key of the document in the external system.
+          type: string
+        attributes:
+          description: Attributes associated with the document.
+          items:
+            $ref: '#/components/schemas/v1Attribute'
+          type: array
+      type: object
+    v1DocumentContent:
+      description: Represents a document content created for processing.
+      example:
+        attributes:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        externalPrimaryKey: externalPrimaryKey
+      properties:
+        externalPrimaryKey:
+          description: The primary key of the document in the external system.
+          type: string
+        attributes:
+          description: Attributes associated with the document.
+          items:
+            $ref: '#/components/schemas/v1Attribute'
+          type: array
+      type: object
+    v1DocumentContentStatusV1:
+      default: DOCUMENT_CONTENT_STATUS_UNSPECIFIED
+      description: |-
+        Status of processing document content.
+
+         - COMPLETE: Document processing has been successful.
+         - ERROR: Document processing was not successful.
+      enum:
+      - DOCUMENT_CONTENT_STATUS_UNSPECIFIED
+      - COMPLETE
+      - ERROR
+      type: string
+    inline_object:
+      description: Request to create a new DocumentContent.
+      properties:
+        body:
+          $ref: '#/components/schemas/v1CreateDocumentContentRequestV1Body'
+      type: object
+x-original-swagger-version: "2.0"
+
