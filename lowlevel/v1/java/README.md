@@ -1,7 +1,7 @@
 # able-java-sdk
 
 Able API
-- API version: 1.20230622180011
+- API version: 1.20230623221606
 
 SDK for building integrations with Able.
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.openapitools</groupId>
   <artifactId>able-java-sdk</artifactId>
-  <version>1.20230622180011</version>
+  <version>1.20230623221606</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "org.openapitools:able-java-sdk:1.20230622180011"
+compile "org.openapitools:able-java-sdk:1.20230623221606"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/able-java-sdk-1.20230622180011.jar`
+* `target/able-java-sdk-1.20230623221606.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

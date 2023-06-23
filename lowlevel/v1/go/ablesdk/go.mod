@@ -1,4 +1,4 @@
-module github.com/ableorg/ablesdk/lowlevel/v1/go/openapi
+module github.com/ableorg/ablesdk/lowlevel/v1/go/ablesdk
 
 go 1.13
 

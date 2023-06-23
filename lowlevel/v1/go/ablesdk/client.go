@@ -3,7 +3,7 @@
  *
  * SDK for building integrations with Able.
  *
- * API version: 1.20230622180011
+ * API version: 1.20230623221606
  * Contact: support@able.ai
  */
 
@@ -41,7 +41,7 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the Able API API v1.20230622180011
+// APIClient manages communication with the Able API API v1.20230623221606
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
