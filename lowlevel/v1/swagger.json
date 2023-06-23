@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Able API",
-    "version": "1.20230622180011",
+    "version": "1.20230623221606",
     "description": "SDK for building integrations with Able.",
     "contact": {
       "name": "Able technical support",

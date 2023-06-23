@@ -9,7 +9,7 @@ info:
     name: MIT
     url: https://github.com/ableorg/ablesdk/blob/main/LICENSE
   title: Able API
-  version: "1.20230622180011"
+  version: "1.20230623221606"
 servers:
 - url: https://api.ableai.com/
 tags:
