@@ -149,7 +149,7 @@ $apiInstance = new OpenAPI\Client\Api\APIApi(
     new GuzzleHttp\Client()
 );
 $extension_id = 'extension_id_example'; // string | The unique ID of the extension.
-$body = new \OpenAPI\Client\Model\InlineObject(); // \OpenAPI\Client\Model\InlineObject
+$body = new \OpenAPI\Client\Model\V1CreateDocumentContentRequestV1Body(); // \OpenAPI\Client\Model\V1CreateDocumentContentRequestV1Body
 
 try {
     $result = $apiInstance->aPICreateDocumentContentV1($extension_id, $body);
@@ -164,7 +164,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **extension_id** | **string**| The unique ID of the extension. |
- **body** | [**\OpenAPI\Client\Model\InlineObject**](../Model/InlineObject.md)|  |
+ **body** | [**\OpenAPI\Client\Model\V1CreateDocumentContentRequestV1Body**](../Model/V1CreateDocumentContentRequestV1Body.md)|  |
 
 ### Return type
 

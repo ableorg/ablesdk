@@ -125,7 +125,7 @@ my $api_instance = AbleSDK::APIApi->new(
 );
 
 my $extension_id = "extension_id_example"; # string | The unique ID of the extension.
-my $body = AbleSDK::Object::InlineObject->new(); # InlineObject | 
+my $body = AbleSDK::Object::V1CreateDocumentContentRequestV1Body->new(); # V1CreateDocumentContentRequestV1Body | 
 
 eval { 
     my $result = $api_instance->a_pi_create_document_content_v1(extension_id => $extension_id, body => $body);
@@ -141,7 +141,7 @@ if ($@) {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **extension_id** | **string**| The unique ID of the extension. | 
- **body** | [**InlineObject**](InlineObject.md)|  | 
+ **body** | [**V1CreateDocumentContentRequestV1Body**](V1CreateDocumentContentRequestV1Body.md)|  | 
 
 ### Return type
 

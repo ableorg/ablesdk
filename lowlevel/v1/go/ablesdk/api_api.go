@@ -3,7 +3,7 @@
  *
  * SDK for building integrations with Able.
  *
- * API version: 1.20230623221606
+ * API version: 1.20230628184958
  * Contact: support@able.ai
  */
 
@@ -288,10 +288,10 @@ type ApiAPICreateDocumentContentV1Request struct {
 	ctx _context.Context
 	ApiService *APIApiService
 	extensionId string
-	body *InlineObject
+	body *V1CreateDocumentContentRequestV1Body
 }
 
-func (r ApiAPICreateDocumentContentV1Request) Body(body InlineObject) ApiAPICreateDocumentContentV1Request {
+func (r ApiAPICreateDocumentContentV1Request) Body(body V1CreateDocumentContentRequestV1Body) ApiAPICreateDocumentContentV1Request {
 	r.body = &body
 	return r
 }

@@ -171,8 +171,8 @@ import time
 import able_sdk
 from able_sdk.api import api_api
 from able_sdk.model.v1_document_content import V1DocumentContent
+from able_sdk.model.v1_create_document_content_request_v1_body import V1CreateDocumentContentRequestV1Body
 from able_sdk.model.rpc_status import RpcStatus
-from able_sdk.model.inline_object import InlineObject
 from pprint import pprint
 # Defining the host is optional and defaults to https://api.ableai.com
 # See configuration.py for a list of all supported configuration parameters.
@@ -186,22 +186,20 @@ with able_sdk.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = api_api.APIApi(api_client)
     extension_id = "extensionId_example" # str | The unique ID of the extension.
-    body = InlineObject(
-        body=V1CreateDocumentContentRequestV1Body(
-            documents=[
-                V1Document(
-                    external_primary_key="external_primary_key_example",
-                    attributes=[
-                        V1Attribute(
-                            key="key_example",
-                            value="value_example",
-                            type=V1AttributeTypeV1("ATTRIBUTE_TYPE_UNSPECIFIED"),
-                        ),
-                    ],
-                ),
-            ],
-        ),
-    ) # InlineObject | 
+    body = V1CreateDocumentContentRequestV1Body(
+        documents=[
+            V1Document(
+                external_primary_key="external_primary_key_example",
+                attributes=[
+                    V1Attribute(
+                        key="key_example",
+                        value="value_example",
+                        type=V1AttributeTypeV1("ATTRIBUTE_TYPE_UNSPECIFIED"),
+                    ),
+                ],
+            ),
+        ],
+    ) # V1CreateDocumentContentRequestV1Body | 
 
     # example passing only required values which don't have defaults set
     try:
@@ -217,7 +215,7 @@ with able_sdk.ApiClient() as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **extension_id** | **str**| The unique ID of the extension. |
- **body** | [**InlineObject**](InlineObject.md)|  |
+ **body** | [**V1CreateDocumentContentRequestV1Body**](V1CreateDocumentContentRequestV1Body.md)|  |
 
 ### Return type
 

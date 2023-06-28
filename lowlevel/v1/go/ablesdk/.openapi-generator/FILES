@@ -7,7 +7,6 @@ api_api.go
 client.go
 configuration.go
 docs/APIApi.md
-docs/InlineObject.md
 docs/ProtobufAny.md
 docs/RpcStatus.md
 docs/V1AcquireDocumentContentRequestV1Body.md
@@ -24,7 +23,6 @@ docs/V1DocumentContentStatusV1.md
 git_push.sh
 go.mod
 go.sum
-model_inline_object.go
 model_protobuf_any.go
 model_rpc_status.go
 model_v1_acquire_document_content_request_v1_body.go

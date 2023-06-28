@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Able API",
-    "version": "1.20230623221606",
+    "version": "1.20230628184958",
     "description": "SDK for building integrations with Able.",
     "contact": {
       "name": "Able technical support",
@@ -57,13 +57,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/v1CreateDocumentContentRequestV1Body"
-                }
-              },
-              "description": "Request to create a new DocumentContent."
+              "$ref": "#/definitions/v1CreateDocumentContentRequestV1Body"
             }
           }
         ],

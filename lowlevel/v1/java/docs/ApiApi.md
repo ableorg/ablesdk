@@ -163,7 +163,7 @@ public class Example {
 
     ApiApi apiInstance = new ApiApi(defaultClient);
     String extensionId = "extensionId_example"; // String | The unique ID of the extension.
-    InlineObject body = new InlineObject(); // InlineObject | 
+    V1CreateDocumentContentRequestV1Body body = new V1CreateDocumentContentRequestV1Body(); // V1CreateDocumentContentRequestV1Body | 
     try {
       V1DocumentContent result = apiInstance.aPICreateDocumentContentV1(extensionId, body);
       System.out.println(result);
@@ -183,7 +183,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **extensionId** | **String**| The unique ID of the extension. |
- **body** | [**InlineObject**](InlineObject.md)|  |
+ **body** | [**V1CreateDocumentContentRequestV1Body**](V1CreateDocumentContentRequestV1Body.md)|  |
 
 ### Return type
 

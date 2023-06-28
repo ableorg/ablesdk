@@ -9,7 +9,6 @@
 # import sys
 # sys.setrecursionlimit(n)
 
-from able_sdk.model.inline_object import InlineObject
 from able_sdk.model.protobuf_any import ProtobufAny
 from able_sdk.model.rpc_status import RpcStatus
 from able_sdk.model.v1_acquire_document_content_request_v1_body import V1AcquireDocumentContentRequestV1Body
