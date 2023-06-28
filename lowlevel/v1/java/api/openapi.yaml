@@ -9,7 +9,7 @@ info:
     name: MIT
     url: https://github.com/ableorg/ablesdk/blob/main/LICENSE
   title: Able API
-  version: "1.20230623221606"
+  version: "1.20230628184958"
 servers:
 - url: https://api.ableai.com/
 tags:
@@ -26,15 +26,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object'
         content:
           application/json:
             schema:
-              description: Request to create a new DocumentContent.
-              properties:
-                body:
-                  $ref: '#/components/schemas/v1CreateDocumentContentRequestV1Body'
-              type: object
+              $ref: '#/components/schemas/v1CreateDocumentContentRequestV1Body'
         required: true
       responses:
         "200":
@@ -154,13 +149,6 @@ paths:
       x-contentType: application/json
       x-accepts: application/json
 components:
-  requestBodies:
-    inline_object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object'
-      required: true
   schemas:
     protobufAny:
       additionalProperties:
@@ -384,11 +372,5 @@ components:
       - COMPLETE
       - ERROR
       type: string
-    inline_object:
-      description: Request to create a new DocumentContent.
-      properties:
-        body:
-          $ref: '#/components/schemas/v1CreateDocumentContentRequestV1Body'
-      type: object
 x-original-swagger-version: "2.0"
 

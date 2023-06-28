@@ -1,4 +1,3 @@
-export * from './InlineObject';
 export * from './ProtobufAny';
 export * from './RpcStatus';
 export * from './V1AcquireDocumentContentRequestV1Body';

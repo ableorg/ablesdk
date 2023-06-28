@@ -159,7 +159,7 @@ No authorization required
 
 <a name="apicreatedocumentcontentv1"></a>
 # **APICreateDocumentContentV1**
-> V1DocumentContent APICreateDocumentContentV1 (string extensionId, InlineObject body)
+> V1DocumentContent APICreateDocumentContentV1 (string extensionId, V1CreateDocumentContentRequestV1Body body)
 
 Creates a new DocumentContent. The DocumentContent represents a document from an external system that needs to be processed.
 
@@ -181,7 +181,7 @@ namespace Example
             config.BasePath = "https://api.ableai.com";
             var apiInstance = new APIApi(config);
             var extensionId = extensionId_example;  // string | The unique ID of the extension.
-            var body = new InlineObject(); // InlineObject | 
+            var body = new V1CreateDocumentContentRequestV1Body(); // V1CreateDocumentContentRequestV1Body | 
 
             try
             {
@@ -205,7 +205,7 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **extensionId** | **string**| The unique ID of the extension. | 
- **body** | [**InlineObject**](InlineObject.md)|  | 
+ **body** | [**V1CreateDocumentContentRequestV1Body**](V1CreateDocumentContentRequestV1Body.md)|  | 
 
 ### Return type
 

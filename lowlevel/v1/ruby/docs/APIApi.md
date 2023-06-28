@@ -157,7 +157,7 @@ require 'able_sdk'
 
 api_instance = AbleSDK::APIApi.new
 extension_id = 'extension_id_example' # String | The unique ID of the extension.
-body = AbleSDK::InlineObject.new # InlineObject | 
+body = AbleSDK::V1CreateDocumentContentRequestV1Body.new # V1CreateDocumentContentRequestV1Body | 
 
 begin
   # Creates a new DocumentContent. The DocumentContent represents a document from an external system that needs to be processed.
@@ -191,7 +191,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **extension_id** | **String** | The unique ID of the extension. |  |
-| **body** | [**InlineObject**](InlineObject.md) |  |  |
+| **body** | [**V1CreateDocumentContentRequestV1Body**](V1CreateDocumentContentRequestV1Body.md) |  |  |
 
 ### Return type
 

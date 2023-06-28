@@ -179,7 +179,7 @@ import (
 
 func main() {
     extensionId := "extensionId_example" // string | The unique ID of the extension.
-    body := *openapiclient.NewInlineObject() // InlineObject | 
+    body := *openapiclient.NewV1CreateDocumentContentRequestV1Body() // V1CreateDocumentContentRequestV1Body | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -209,7 +209,7 @@ Other parameters are passed through a pointer to a apiAPICreateDocumentContentV1
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**InlineObject**](InlineObject.md) |  | 
+ **body** | [**V1CreateDocumentContentRequestV1Body**](V1CreateDocumentContentRequestV1Body.md) |  | 
 
 ### Return type
 

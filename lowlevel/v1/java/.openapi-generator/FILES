@@ -6,7 +6,6 @@ api/openapi.yaml
 build.gradle
 build.sbt
 docs/ApiApi.md
-docs/InlineObject.md
 docs/ProtobufAny.md
 docs/RpcStatus.md
 docs/V1AcquireDocumentContentRequestV1Body.md
@@ -47,7 +46,6 @@ src/main/java/com/ableai/api/auth/Authentication.java
 src/main/java/com/ableai/api/auth/HttpBasicAuth.java
 src/main/java/com/ableai/api/auth/HttpBearerAuth.java
 src/main/java/com/ableai/api/sdk/ApiApi.java
-src/main/java/com/ableai/api/sdk/model/InlineObject.java
 src/main/java/com/ableai/api/sdk/model/ProtobufAny.java
 src/main/java/com/ableai/api/sdk/model/RpcStatus.java
 src/main/java/com/ableai/api/sdk/model/V1AcquireDocumentContentRequestV1Body.java
@@ -62,7 +60,6 @@ src/main/java/com/ableai/api/sdk/model/V1Document.java
 src/main/java/com/ableai/api/sdk/model/V1DocumentContent.java
 src/main/java/com/ableai/api/sdk/model/V1DocumentContentStatusV1.java
 src/test/java/com/ableai/api/sdk/ApiApiTest.java
-src/test/java/com/ableai/api/sdk/model/InlineObjectTest.java
 src/test/java/com/ableai/api/sdk/model/ProtobufAnyTest.java
 src/test/java/com/ableai/api/sdk/model/RpcStatusTest.java
 src/test/java/com/ableai/api/sdk/model/V1AcquireDocumentContentRequestV1BodyTest.java

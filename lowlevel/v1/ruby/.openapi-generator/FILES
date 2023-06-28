@@ -8,7 +8,6 @@ README.md
 Rakefile
 able_sdk.gemspec
 docs/APIApi.md
-docs/InlineObject.md
 docs/ProtobufAny.md
 docs/RpcStatus.md
 docs/V1AcquireDocumentContentRequestV1Body.md
@@ -29,7 +28,6 @@ lib/able_sdk/api_client.rb
 lib/able_sdk/api_error.rb
 lib/able_sdk/configuration.rb
 lib/able_sdk/configuration.rb
-lib/able_sdk/models/inline_object.rb
 lib/able_sdk/models/protobuf_any.rb
 lib/able_sdk/models/rpc_status.rb
 lib/able_sdk/models/v1_acquire_document_content_request_v1_body.rb
@@ -47,7 +45,6 @@ lib/able_sdk/version.rb
 spec/api/api_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/inline_object_spec.rb
 spec/models/protobuf_any_spec.rb
 spec/models/rpc_status_spec.rb
 spec/models/v1_acquire_document_content_request_v1_body_spec.rb

@@ -5,7 +5,6 @@
 README.md
 composer.json
 docs/Api/APIApi.md
-docs/Model/InlineObject.md
 docs/Model/ProtobufAny.md
 docs/Model/RpcStatus.md
 docs/Model/V1AcquireDocumentContentRequestV1Body.md
@@ -24,7 +23,6 @@ lib/Api/APIApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
-lib/Model/InlineObject.php
 lib/Model/ModelInterface.php
 lib/Model/ProtobufAny.php
 lib/Model/RpcStatus.php
@@ -42,7 +40,6 @@ lib/Model/V1DocumentContentStatusV1.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
 test/Api/APIApiTest.php
-test/Model/InlineObjectTest.php
 test/Model/ProtobufAnyTest.php
 test/Model/RpcStatusTest.php
 test/Model/V1AcquireDocumentContentRequestV1BodyTest.php
