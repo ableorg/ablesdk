@@ -3,7 +3,7 @@
  *
  * SDK for building integrations with Able.
  *
- * API version: 1.20230628184958
+ * API version: 1.20230717220244
  * Contact: support@able.ai
  */
 
@@ -21,6 +21,8 @@ type V1Document struct {
 	ExternalPrimaryKey *string `json:"externalPrimaryKey,omitempty"`
 	// Attributes associated with the document.
 	Attributes *[]V1Attribute `json:"attributes,omitempty"`
+	// The pretty name of the document.
+	PrettyName *string `json:"prettyName,omitempty"`
 }
 
 // NewV1Document instantiates a new V1Document object
@@ -104,6 +106,38 @@ func (o *V1Document) SetAttributes(v []V1Attribute) {
 	o.Attributes = &v
 }
 
+// GetPrettyName returns the PrettyName field value if set, zero value otherwise.
+func (o *V1Document) GetPrettyName() string {
+	if o == nil || o.PrettyName == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrettyName
+}
+
+// GetPrettyNameOk returns a tuple with the PrettyName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1Document) GetPrettyNameOk() (*string, bool) {
+	if o == nil || o.PrettyName == nil {
+		return nil, false
+	}
+	return o.PrettyName, true
+}
+
+// HasPrettyName returns a boolean if a field has been set.
+func (o *V1Document) HasPrettyName() bool {
+	if o != nil && o.PrettyName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrettyName gets a reference to the given string and assigns it to the PrettyName field.
+func (o *V1Document) SetPrettyName(v string) {
+	o.PrettyName = &v
+}
+
 func (o V1Document) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ExternalPrimaryKey != nil {
@@ -111,6 +145,9 @@ func (o V1Document) MarshalJSON() ([]byte, error) {
 	}
 	if o.Attributes != nil {
 		toSerialize["attributes"] = o.Attributes
+	}
+	if o.PrettyName != nil {
+		toSerialize["prettyName"] = o.PrettyName
 	}
 	return json.Marshal(toSerialize)
 }

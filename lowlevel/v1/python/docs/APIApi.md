@@ -197,6 +197,7 @@ with able_sdk.ApiClient() as api_client:
                         type=V1AttributeTypeV1("ATTRIBUTE_TYPE_UNSPECIFIED"),
                     ),
                 ],
+                pretty_name="pretty_name_example",
             ),
         ],
     ) # V1CreateDocumentContentRequestV1Body | 
