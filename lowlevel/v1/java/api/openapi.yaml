@@ -9,7 +9,7 @@ info:
     name: MIT
     url: https://github.com/ableorg/ablesdk/blob/main/LICENSE
   title: Able API
-  version: "1.20230628184958"
+  version: "1.20230717220244"
 servers:
 - url: https://api.ableai.com/
 tags:
@@ -340,6 +340,9 @@ components:
           items:
             $ref: '#/components/schemas/v1Attribute'
           type: array
+        prettyName:
+          description: The pretty name of the document.
+          type: string
       type: object
     v1DocumentContent:
       description: Represents a document content created for processing.

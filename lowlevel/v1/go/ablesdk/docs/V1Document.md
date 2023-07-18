@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ExternalPrimaryKey** | Pointer to **string** | The primary key of the document in the external system. | [optional] 
 **Attributes** | Pointer to [**[]V1Attribute**](V1Attribute.md) | Attributes associated with the document. | [optional] 
+**PrettyName** | Pointer to **string** | The pretty name of the document. | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetAttributes sets Attributes field to given value.
 `func (o *V1Document) HasAttributes() bool`
 
 HasAttributes returns a boolean if a field has been set.
+
+### GetPrettyName
+
+`func (o *V1Document) GetPrettyName() string`
+
+GetPrettyName returns the PrettyName field if non-nil, zero value otherwise.
+
+### GetPrettyNameOk
+
+`func (o *V1Document) GetPrettyNameOk() (*string, bool)`
+
+GetPrettyNameOk returns a tuple with the PrettyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrettyName
+
+`func (o *V1Document) SetPrettyName(v string)`
+
+SetPrettyName sets PrettyName field to given value.
+
+### HasPrettyName
+
+`func (o *V1Document) HasPrettyName() bool`
+
+HasPrettyName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

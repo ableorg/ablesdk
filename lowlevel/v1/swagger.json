@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Able API",
-    "version": "1.20230628184958",
+    "version": "1.20230717220244",
     "description": "SDK for building integrations with Able.",
     "contact": {
       "name": "Able technical support",
@@ -384,6 +384,10 @@
             "$ref": "#/definitions/v1Attribute"
           },
           "description": "Attributes associated with the document."
+        },
+        "prettyName": {
+          "type": "string",
+          "description": "The pretty name of the document."
         }
       },
       "description": "Represents a document to be added to a DocumentContent."
