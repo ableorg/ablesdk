@@ -5,7 +5,7 @@
     <artifactId>able-java-sdk</artifactId>
     <packaging>jar</packaging>
     <name>able-java-sdk</name>
-    <version>1.20230717220244</version>
+    <version>1.20230727053012</version>
     <url>https://github.com/ableorg/ablesdk/tree/main/lowlevel/v1/java</url>
     <description>Able Java SDK</description>
     <scm>

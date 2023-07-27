@@ -3,7 +3,7 @@
  *
  * SDK for building integrations with Able.
  *
- * API version: 1.20230717220244
+ * API version: 1.20230727053012
  * Contact: support@able.ai
  */
 

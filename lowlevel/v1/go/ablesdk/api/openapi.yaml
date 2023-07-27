@@ -9,7 +9,7 @@ info:
     name: MIT
     url: https://github.com/ableorg/ablesdk/blob/main/LICENSE
   title: Able API
-  version: "1.20230717220244"
+  version: "1.20230727053012"
 servers:
 - url: https://api.ableai.com/
 tags:
@@ -176,8 +176,14 @@ components:
       example:
         documentContentId: documentContentId
         contentUrl: contentUrl
+        taskType: taskType
         uploadUrl: uploadUrl
         standardizedPdfUrl: standardizedPdfUrl
+        attributes:
+        - value: value
+          key: key
+        - value: value
+          key: key
         rawFileUrl: rawFileUrl
         acquiredTime: 2000-01-23T04:56:07.000+00:00
         acquiredBy: acquiredBy
@@ -217,6 +223,14 @@ components:
             the task will be retried.
           format: date-time
           type: string
+        taskType:
+          title: The Type of task can be File.Document or Structure.*
+          type: string
+        attributes:
+          items:
+            $ref: '#/components/schemas/v1Attribute'
+          title: Attributes to be used for processing if applicable
+          type: array
       type: object
     v1Attribute:
       description: Represents an attribute of document content.

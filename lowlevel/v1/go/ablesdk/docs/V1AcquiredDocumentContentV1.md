@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **AcquiredBy** | Pointer to **string** | The name of the worker that acquired the document content. | [optional] 
 **AcquiredTime** | Pointer to **time.Time** | The timestamp when the document content was acquired. | [optional] 
 **NextRetryTime** | Pointer to **time.Time** | The expected time of task compleation. If not completed before this time, the task will be retried. | [optional] 
+**TaskType** | Pointer to **string** |  | [optional] 
+**Attributes** | Pointer to [**[]V1Attribute**](V1Attribute.md) |  | [optional] 
 
 ## Methods
 
@@ -283,6 +285,56 @@ SetNextRetryTime sets NextRetryTime field to given value.
 `func (o *V1AcquiredDocumentContentV1) HasNextRetryTime() bool`
 
 HasNextRetryTime returns a boolean if a field has been set.
+
+### GetTaskType
+
+`func (o *V1AcquiredDocumentContentV1) GetTaskType() string`
+
+GetTaskType returns the TaskType field if non-nil, zero value otherwise.
+
+### GetTaskTypeOk
+
+`func (o *V1AcquiredDocumentContentV1) GetTaskTypeOk() (*string, bool)`
+
+GetTaskTypeOk returns a tuple with the TaskType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskType
+
+`func (o *V1AcquiredDocumentContentV1) SetTaskType(v string)`
+
+SetTaskType sets TaskType field to given value.
+
+### HasTaskType
+
+`func (o *V1AcquiredDocumentContentV1) HasTaskType() bool`
+
+HasTaskType returns a boolean if a field has been set.
+
+### GetAttributes
+
+`func (o *V1AcquiredDocumentContentV1) GetAttributes() []V1Attribute`
+
+GetAttributes returns the Attributes field if non-nil, zero value otherwise.
+
+### GetAttributesOk
+
+`func (o *V1AcquiredDocumentContentV1) GetAttributesOk() (*[]V1Attribute, bool)`
+
+GetAttributesOk returns a tuple with the Attributes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAttributes
+
+`func (o *V1AcquiredDocumentContentV1) SetAttributes(v []V1Attribute)`
+
+SetAttributes sets Attributes field to given value.
+
+### HasAttributes
+
+`func (o *V1AcquiredDocumentContentV1) HasAttributes() bool`
+
+HasAttributes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

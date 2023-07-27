@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Able API",
-    "version": "1.20230717220244",
+    "version": "1.20230727053012",
     "description": "SDK for building integrations with Able.",
     "contact": {
       "name": "Able technical support",
@@ -252,6 +252,17 @@
           "type": "string",
           "format": "date-time",
           "description": "The expected time of task compleation. If not completed before this time,\nthe task will be retried."
+        },
+        "taskType": {
+          "type": "string",
+          "title": "The Type of task can be File.Document or Structure.*"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Attribute"
+          },
+          "title": "Attributes to be used for processing if applicable"
         }
       },
       "description": "Represents a DocumentContent that has been acquired for processing."
