@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **acquired_by** | **str** | The name of the worker that acquired the document content. | [optional] 
 **acquired_time** | **datetime** | The timestamp when the document content was acquired. | [optional] 
 **next_retry_time** | **datetime** | The expected time of task compleation. If not completed before this time, the task will be retried. | [optional] 
+**task_type** | **str** |  | [optional] 
+**attributes** | [**[V1Attribute]**](V1Attribute.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

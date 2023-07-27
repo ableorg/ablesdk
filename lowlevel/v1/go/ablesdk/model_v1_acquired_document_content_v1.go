@@ -3,7 +3,7 @@
  *
  * SDK for building integrations with Able.
  *
- * API version: 1.20230717220244
+ * API version: 1.20230727053012
  * Contact: support@able.ai
  */
 
@@ -37,6 +37,8 @@ type V1AcquiredDocumentContentV1 struct {
 	AcquiredTime *time.Time `json:"acquiredTime,omitempty"`
 	// The expected time of task compleation. If not completed before this time, the task will be retried.
 	NextRetryTime *time.Time `json:"nextRetryTime,omitempty"`
+	TaskType *string `json:"taskType,omitempty"`
+	Attributes *[]V1Attribute `json:"attributes,omitempty"`
 }
 
 // NewV1AcquiredDocumentContentV1 instantiates a new V1AcquiredDocumentContentV1 object
@@ -380,6 +382,70 @@ func (o *V1AcquiredDocumentContentV1) SetNextRetryTime(v time.Time) {
 	o.NextRetryTime = &v
 }
 
+// GetTaskType returns the TaskType field value if set, zero value otherwise.
+func (o *V1AcquiredDocumentContentV1) GetTaskType() string {
+	if o == nil || o.TaskType == nil {
+		var ret string
+		return ret
+	}
+	return *o.TaskType
+}
+
+// GetTaskTypeOk returns a tuple with the TaskType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1AcquiredDocumentContentV1) GetTaskTypeOk() (*string, bool) {
+	if o == nil || o.TaskType == nil {
+		return nil, false
+	}
+	return o.TaskType, true
+}
+
+// HasTaskType returns a boolean if a field has been set.
+func (o *V1AcquiredDocumentContentV1) HasTaskType() bool {
+	if o != nil && o.TaskType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTaskType gets a reference to the given string and assigns it to the TaskType field.
+func (o *V1AcquiredDocumentContentV1) SetTaskType(v string) {
+	o.TaskType = &v
+}
+
+// GetAttributes returns the Attributes field value if set, zero value otherwise.
+func (o *V1AcquiredDocumentContentV1) GetAttributes() []V1Attribute {
+	if o == nil || o.Attributes == nil {
+		var ret []V1Attribute
+		return ret
+	}
+	return *o.Attributes
+}
+
+// GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1AcquiredDocumentContentV1) GetAttributesOk() (*[]V1Attribute, bool) {
+	if o == nil || o.Attributes == nil {
+		return nil, false
+	}
+	return o.Attributes, true
+}
+
+// HasAttributes returns a boolean if a field has been set.
+func (o *V1AcquiredDocumentContentV1) HasAttributes() bool {
+	if o != nil && o.Attributes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAttributes gets a reference to the given []V1Attribute and assigns it to the Attributes field.
+func (o *V1AcquiredDocumentContentV1) SetAttributes(v []V1Attribute) {
+	o.Attributes = &v
+}
+
 func (o V1AcquiredDocumentContentV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DocumentContentId != nil {
@@ -411,6 +477,12 @@ func (o V1AcquiredDocumentContentV1) MarshalJSON() ([]byte, error) {
 	}
 	if o.NextRetryTime != nil {
 		toSerialize["nextRetryTime"] = o.NextRetryTime
+	}
+	if o.TaskType != nil {
+		toSerialize["taskType"] = o.TaskType
+	}
+	if o.Attributes != nil {
+		toSerialize["attributes"] = o.Attributes
 	}
 	return json.Marshal(toSerialize)
 }

@@ -14,6 +14,8 @@
 | **acquired_by** | **String** | The name of the worker that acquired the document content. | [optional] |
 | **acquired_time** | **Time** | The timestamp when the document content was acquired. | [optional] |
 | **next_retry_time** | **Time** | The expected time of task compleation. If not completed before this time, the task will be retried. | [optional] |
+| **task_type** | **String** |  | [optional] |
+| **attributes** | [**Array&lt;V1Attribute&gt;**](V1Attribute.md) |  | [optional] |
 
 ## Example
 
@@ -30,7 +32,9 @@ instance = AbleSDK::V1AcquiredDocumentContentV1.new(
   content_url: null,
   acquired_by: null,
   acquired_time: null,
-  next_retry_time: null
+  next_retry_time: null,
+  task_type: null,
+  attributes: null
 )
 ```
 

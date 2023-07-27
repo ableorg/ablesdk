@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **acquiredBy** | **String** | The name of the worker that acquired the document content. |  [optional]
 **acquiredTime** | **OffsetDateTime** | The timestamp when the document content was acquired. |  [optional]
 **nextRetryTime** | **OffsetDateTime** | The expected time of task compleation. If not completed before this time, the task will be retried. |  [optional]
+**taskType** | **String** |  |  [optional]
+**attributes** | [**List&lt;V1Attribute&gt;**](V1Attribute.md) |  |  [optional]
 
 
 
